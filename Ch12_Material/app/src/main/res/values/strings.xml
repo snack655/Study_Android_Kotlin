@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Ch12_Material</string>
+    <string name="drawer_opened">Opened Drawer</string>
+    <string name="drawer_closed">Closed Drawer</string>
+</resources>
