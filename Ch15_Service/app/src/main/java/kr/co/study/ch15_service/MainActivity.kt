@@ -1,6 +1,7 @@
 package kr.co.study.ch15_service
 
 import android.annotation.TargetApi
+import android.app.Service
 import android.app.job.JobInfo
 import android.app.job.JobScheduler
 import android.content.ComponentName
@@ -12,6 +13,7 @@ import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.getSystemService
 import kotlinx.coroutines.*
+import kr.co.study.ch15_outer.MyAIDLInterface
 import kr.co.study.ch15_service.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -24,8 +26,9 @@ class MainActivity : AppCompatActivity() {
     lateinit var replyMessenger: Messenger
     var messengerJob: Job? = null
 
-    //aidl...........
-
+    //aidl
+    var aidlService: MyAIDLInterface? = null
+    var aidlJob: Job? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -153,14 +156,43 @@ class MainActivity : AppCompatActivity() {
         unbindService(messengerConnection)
     }
 
-    //aidl connection .......................
+    //aidl connection
+    val aidlConnection: ServiceConnection = object : ServiceConnection {
+        override fun onServiceConnected(name: ComponentName?, service: IBinder?) {
+            aidlService = MyAIDLInterface.Stub.asInterface(service)
+            aidlService!!.start()
+            binding.aidlProgress.max = aidlService!!.maxDuration
+            val backgroundScope = CoroutineScope(Dispatchers.Default + Job())
+            aidlJob = backgroundScope.launch {
+                while (binding.aidlProgress.progress < binding.aidlProgress.max) {
+                    delay(1000)
+                    binding.aidlProgress.incrementProgressBy(1000)
+                }
+            }
+            connectionMode = "aidl"
+            changeViewEnable()
+        }
 
-
+        override fun onServiceDisconnected(name: ComponentName?) {
+            aidlService = null
+        }
+    }
     private fun onCreateAIDLService() {
-
+        binding.aidlPlay.setOnClickListener {
+            val intent = Intent("ACTION_SERVICE_AIDL")
+            intent.setPackage("kr.co.study.ch15_outer")
+            bindService(intent, aidlConnection, Context.BIND_AUTO_CREATE)
+        }
+        binding.aidlStop.setOnClickListener {
+            aidlService!!.stop()
+            unbindService(aidlConnection)
+            aidlJob?.cancel()
+            connectionMode="none"
+            changeViewEnable()
+        }
     }
     private fun onStopAIDLService() {
-
+        unbindService(aidlConnection)
     }
 
     //JobScheduler
