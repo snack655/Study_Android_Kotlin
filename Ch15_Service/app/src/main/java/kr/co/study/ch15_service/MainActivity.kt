@@ -198,7 +198,10 @@ class MainActivity : AppCompatActivity() {
     //JobScheduler
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     private fun onCreateJobScheduler(){
-
+        var jobScheduler: JobScheduler? = getSystemService<JobScheduler>()
+        val builder = JobInfo.Builder(1, ComponentName(this, MyJobService::class.java))
+        builder.setRequiredNetworkType(JobInfo.NETWORK_TYPE_UNMETERED)
+        val jobInfo = builder.build()
+        jobScheduler!!.schedule(jobInfo)
     }
-
 }
