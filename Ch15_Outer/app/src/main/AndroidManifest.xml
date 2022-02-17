@@ -10,6 +10,14 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Ch15_Outer">
         <service
+            android:name=".MyAIDLService"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="ACTION_SERVICE_AIDL" />
+            </intent-filter>
+        </service>
+        <service
             android:name=".MyMessengerService"
             android:enabled="true"
             android:exported="true">
