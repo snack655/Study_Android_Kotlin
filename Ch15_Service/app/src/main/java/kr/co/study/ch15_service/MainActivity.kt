@@ -1,4 +1,4 @@
-package com.example.ch15_service
+package kr.co.study.ch15_service
 
 import android.annotation.TargetApi
 import android.app.job.JobInfo
@@ -19,7 +19,10 @@ class MainActivity : AppCompatActivity() {
     lateinit var binding: ActivityMainBinding
     var connectionMode = "none"
 
-    //Messenger......
+    //Messenger
+    lateinit var messenger: Messenger
+    lateinit var replyMessenger: Messenger
+    var messengerJob: Job? = null
 
     //aidl...........
 
@@ -76,17 +79,78 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    //messenger handler ......................
+    // Messenger Handler
+    inner class HandlerReplyMsg : Handler(Looper.getMainLooper()) {
+        override fun handleMessage(msg: Message) {
+            super.handleMessage(msg)
+            when (msg.what) {
+                10 -> {
+                    // 재생 후 지속 시간이 전송되면
+                    val bundle = msg.obj as Bundle
+                    bundle.getInt("duration")?.let {
+                        when {
+                            it > 0 -> {
+                                binding.messengerProgress.max = it
+                                val backgroundScope = CoroutineScope(Dispatchers.Default + Job())
+                                messengerJob = backgroundScope.launch {
+                                    while (binding.messengerProgress.progress < binding.messengerProgress.max) {
+                                        delay(1000)
+                                        binding.messengerProgress.incrementProgressBy(1000)
+                                    }
+                                }
+                                changeViewEnable()
+                            }
+                            else -> {
+                                connectionMode = "none"
+                                unbindService(messengerConnection)
+                                changeViewEnable()
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
 
-    //messenger connection ....................
+    // Messenger connection
+    val messengerConnection: ServiceConnection = object : ServiceConnection {
+        override fun onServiceConnected(name: ComponentName?, service: IBinder?) {
+            Log.d("TestTest", "onServiceConnected... ")
+            messenger = Messenger(service)
+            val msg = Message()
+            msg.replyTo = replyMessenger
+            msg.what = 10
+            messenger.send(msg)
+            connectionMode = "messenger"
+        }
 
-
+        override fun onServiceDisconnected(name: ComponentName?) {
+            Log.d("TestTest", "onServiceDisconnected... ")
+        }
+    }
 
     private fun onCreateMessengerService() {
-
+        replyMessenger = Messenger(HandlerReplyMsg())
+        binding.messengerPlay.setOnClickListener {
+            val intent = Intent("ACTION_SERVICE_Messenger")
+            intent.setPackage("kr.co.study.ch15_outer")
+            bindService(intent, messengerConnection, Context.BIND_AUTO_CREATE)
+        }
+        binding.messengerStop.setOnClickListener {
+            val msg = Message()
+            msg.what = 20
+            messenger.send(msg)
+            unbindService(messengerConnection)
+            messengerJob?.cancel()
+            connectionMode = "none"
+            changeViewEnable()
+        }
     }
     private fun onStopMessengerService() {
-
+        val msg = Message()
+        msg.what = 20
+        messenger.send(msg)
+        unbindService(messengerConnection)
     }
 
     //aidl connection .......................

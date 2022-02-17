@@ -20,4 +20,8 @@
         </activity>
     </application>
 
+    <queries>
+        <package android:name="kr.co.study.ch15_outer" />
+    </queries>
+
 </manifest>
