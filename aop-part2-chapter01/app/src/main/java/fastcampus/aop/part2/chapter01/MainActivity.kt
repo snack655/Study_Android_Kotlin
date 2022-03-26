@@ -33,7 +33,12 @@ class MainActivity : AppCompatActivity() {
             val weight: Int = weightEditText.text.toString().toInt()
 
             val intent = Intent(this, ResultActivity::class.java)
+
+            intent.putExtra("height", height)
+            intent.putExtra("weight", weight)
+
             startActivity(intent)
+
 
             Log.d("MainActivity", "height : $height weight : $weight")
         }
