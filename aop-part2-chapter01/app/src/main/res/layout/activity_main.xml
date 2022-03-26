@@ -9,41 +9,44 @@
     tools:context=".MainActivity">
 
     <TextView
-        android:textSize="20sp"
-        android:text="@string/height"
-        android:textColor="@color/custom_black"
-        android:textStyle="bold"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-    <EditText
-        android:layout_marginTop="10dp"
+        android:id="@+id/tv_height"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:text="@string/height"
+        android:textColor="@color/custom_black"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/heightEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:inputType="number" />
 
     <TextView
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:textColor="@color/custom_black"
-        android:layout_marginTop="30dp"
-        android:id="@+id/textView2"
+        android:id="@+id/tv_weight"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/weight" />
+        android:layout_marginTop="30dp"
+        android:text="@string/weight"
+        android:textColor="@color/custom_black"
+        android:textSize="20sp"
+        android:textStyle="bold" />
 
     <EditText
-        android:layout_marginTop="10dp"
-        android:id="@+id/editTextNumber"
+        android:id="@+id/weightEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:ems="10"
         android:inputType="number" />
 
     <Button
-        android:layout_marginTop="50dp"
-        android:text="@string/confirm"
+        android:id="@+id/resultButton"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:text="@string/confirm" />
 
 </LinearLayout>
