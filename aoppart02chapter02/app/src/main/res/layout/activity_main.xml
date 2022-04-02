@@ -59,6 +59,8 @@
             android:textSize="18sp"
             android:textStyle="bold"
             android:text="1"
+            android:visibility="gone"
+            tools:visibility="visible"
             android:layout_margin="5dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
@@ -67,6 +69,8 @@
             android:textSize="18sp"
             android:textStyle="bold"
             android:layout_margin="5dp"
+            android:visibility="gone"
+            tools:visibility="visible"
             android:text="1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
@@ -74,6 +78,8 @@
             android:id="@+id/textView4"
             android:textSize="18sp"
             android:textStyle="bold"
+            android:visibility="gone"
+            tools:visibility="visible"
             android:layout_margin="5dp"
             android:text="1"
             android:layout_width="wrap_content"
@@ -82,6 +88,18 @@
             android:id="@+id/textView5"
             android:textSize="18sp"
             android:textStyle="bold"
+            android:visibility="gone"
+            tools:visibility="visible"
+            android:layout_margin="5dp"
+            android:text="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/textView6"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:visibility="gone"
+            tools:visibility="visible"
             android:layout_margin="5dp"
             android:text="1"
             android:layout_width="wrap_content"
@@ -98,6 +116,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="wrap_content" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
