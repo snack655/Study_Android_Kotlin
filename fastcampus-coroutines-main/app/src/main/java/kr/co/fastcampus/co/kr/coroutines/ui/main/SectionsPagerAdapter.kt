@@ -7,11 +7,12 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 class SectionsPagerAdapter(private val fragmentActivity: FragmentActivity) :
     FragmentStateAdapter(fragmentActivity) {
 
-    override fun createFragment(position: Int): Fragment {
-        return ImageSearchFragment()
-    }
+    override fun createFragment(position: Int): Fragment =
+        if (position == 0) {
+            ImageSearchFragment()
+        } else {
+            FavouritesFragment()
+        }
 
-    override fun getItemCount(): Int {
-        return 2
-    }
+    override fun getItemCount(): Int = 2
 }

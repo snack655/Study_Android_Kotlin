@@ -16,7 +16,7 @@ class ImageSearchViewModel : ViewModel() {
     private val repository = NaverImageSearchRepository()
     private val queryFlow = MutableSharedFlow<String>()
     private val favorites = mutableSetOf<Item>()
-    private val _favoritesFlow = MutableSharedFlow<List<Item>>()
+    private val _favoritesFlow = MutableSharedFlow<List<Item>>(replay = 1)
 
     val pagingDataFlow = queryFlow
         .flatMapLatest {
