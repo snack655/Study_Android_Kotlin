@@ -6,26 +6,36 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <fastcampus.aop.part2.chapter07.SoundVisualizerView
+        android:id="@+id/soundVisualizerView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="10dp"
+        app:layout_constraintBottom_toTopOf="@id/recordTimeText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <Button
         android:id="@+id/resetButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="RESET"
+        app:layout_constraintBottom_toBottomOf="@id/recordButton"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toLeftOf="@+id/recordButton"
         app:layout_constraintTop_toTopOf="@id/recordButton"
-        app:layout_constraintBottom_toBottomOf="@id/recordButton"
         tools:ignore="HardcodedText" />
 
-    <TextView
+    <fastcampus.aop.part2.chapter07.CountUpTextView
         android:id="@+id/recordTimeText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="00:00"
         android:layout_marginBottom="20dp"
+        android:text="00:00"
+        app:layout_constraintBottom_toTopOf="@+id/recordButton"
         app:layout_constraintLeft_toLeftOf="@id/recordButton"
         app:layout_constraintRight_toRightOf="@+id/recordButton"
-        app:layout_constraintBottom_toTopOf="@+id/recordButton"
         tools:ignore="HardcodedText" />
 
     <fastcampus.aop.part2.chapter07.RecordButton
@@ -33,8 +43,8 @@
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_marginBottom="50dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        app:layout_constraintRight_toRightOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
