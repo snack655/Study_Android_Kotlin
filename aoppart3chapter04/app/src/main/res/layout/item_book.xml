@@ -10,6 +10,7 @@
         android:id="@+id/coverImageView"
         android:layout_width="100dp"
         android:layout_height="100dp"
+        android:padding="5dp"
         android:background="@drawable/background_gray_stroke_radious_16"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"

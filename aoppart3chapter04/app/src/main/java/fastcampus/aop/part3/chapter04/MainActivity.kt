@@ -8,6 +8,8 @@ import fastcampus.aop.part3.chapter04.adapter.BookAdapter
 import fastcampus.aop.part3.chapter04.api.BookService
 import fastcampus.aop.part3.chapter04.databinding.ActivityMainBinding
 import fastcampus.aop.part3.chapter04.model.BestSellerDto
+import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -25,8 +27,13 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         initBookRecyclerView()
 
+        val interceptor = HttpLoggingInterceptor()
+        interceptor.level = HttpLoggingInterceptor.Level.BODY
+        val okHttpClient = OkHttpClient().newBuilder().addInterceptor(interceptor).build()
+
         val retrofit = Retrofit.Builder()
-            .baseUrl("http://book.interpak.com")
+            .client(okHttpClient)
+            .baseUrl("http://book.interpark.com")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 
