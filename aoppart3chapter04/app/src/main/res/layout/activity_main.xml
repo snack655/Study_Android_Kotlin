@@ -9,6 +9,8 @@
     <EditText
         android:id="@+id/searchEditText"
         android:layout_width="0dp"
+        android:lines="1"
+        android:inputType="text"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
