@@ -40,11 +40,7 @@ class MainActivity : AppCompatActivity() {
         initBookRecyclerView()
         initHistoryRecyclerView()
 
-        db = Room.databaseBuilder(
-            applicationContext,
-            AppDatabase::class.java,
-            "BookSearchDB"
-        ).build()
+        db = getAppDatabase(this)
 
         val interceptor = HttpLoggingInterceptor()
         interceptor.level = HttpLoggingInterceptor.Level.BODY
