@@ -8,6 +8,7 @@
         <entry key="app/src/main/res/layout/fragment_chatlist.xml" value="0.28229166666666666" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.28125" />
         <entry key="app/src/main/res/layout/fragment_mypage.xml" value="0.28229166666666666" />
+        <entry key="app/src/main/res/layout/item_article.xml" value="0.28125" />
         <entry key="app/src/main/res/menu/bottom_navigation_menu.xml" value="0.28125" />
       </map>
     </option>
