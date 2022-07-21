@@ -6,6 +6,7 @@ import android.media.MediaPlayer
 import android.media.MediaRecorder
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 
 class MainActivity : AppCompatActivity() {
@@ -80,6 +81,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun bindViews() {
         soundVisualizerView.onRequestCurrentAmplitude = {
+            Log.d("TestTest", "bindViews: ${recorder?.maxAmplitude}")
             recorder?.maxAmplitude ?: 0
         }
         resetButton.setOnClickListener {
