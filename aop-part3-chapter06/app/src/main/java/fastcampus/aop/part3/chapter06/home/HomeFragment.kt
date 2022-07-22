@@ -60,13 +60,12 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
         fragmentHomeBinding.addFloatingButton.setOnClickListener {
             context?.let {
-                // todo 로그인 구현 후에 주석 지우기
-                //if (auth.currentUser != null) {
+                if (auth.currentUser != null) {
                     val intent = Intent(it, AddArticleActivity::class.java)
                     startActivity(intent)
-                //} else {
-                //    Snackbar.make(view, "로그인 후 사용해주세요", Snackbar.LENGTH_LONG).show()
-                //}
+                } else {
+                    Snackbar.make(view, "로그인 후 사용해주세요", Snackbar.LENGTH_LONG).show()
+                }
             }
         }
 
