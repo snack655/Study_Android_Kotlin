@@ -5,11 +5,13 @@
       <map>
         <entry key="app/src/main/res/drawable/selector_menu_color.xml" value="0.1225" />
         <entry key="app/src/main/res/layout/activity_add_article.xml" value="0.18521575927734377" />
+        <entry key="app/src/main/res/layout/activity_chat_room.xml" value="0.16252288818359376" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.1741714477539063" />
         <entry key="app/src/main/res/layout/fragment_chatlist.xml" value="0.28229166666666666" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.28125" />
         <entry key="app/src/main/res/layout/fragment_mypage.xml" value="0.28229166666666666" />
         <entry key="app/src/main/res/layout/item_article.xml" value="0.28125" />
+        <entry key="app/src/main/res/layout/item_chat.xml" value="0.28125" />
         <entry key="app/src/main/res/layout/item_chat_list.xml" value="0.28125" />
         <entry key="app/src/main/res/menu/bottom_navigation_menu.xml" value="0.28125" />
       </map>
