@@ -6,6 +6,7 @@
         <entry key="app/src/main/res/drawable/top_radius_white_background.xml" value="0.1225" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="app/src/main/res/layout/bottom_sheet.xml" value="0.1746246337890625" />
+        <entry key="app/src/main/res/layout/item_house.xml" value="0.28125" />
         <entry key="app/src/main/res/layout/item_house_detail_for_viewpager.xml" value="0.13125" />
       </map>
     </option>
