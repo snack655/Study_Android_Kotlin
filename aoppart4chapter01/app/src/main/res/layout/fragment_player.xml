@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.motion.widget.MotionLayout
+<fastcampus.aop.part4.chapter01.CustomMotionLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/playerMotionLayout"
@@ -58,5 +58,4 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/mainContainerLayout" />
 
-
-</androidx.constraintlayout.motion.widget.MotionLayout>
+</fastcampus.aop.part4.chapter01.CustomMotionLayout>
