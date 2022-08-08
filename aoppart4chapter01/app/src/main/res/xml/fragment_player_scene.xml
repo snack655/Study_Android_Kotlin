@@ -6,8 +6,23 @@
     <Transition
         motion:constraintSetEnd="@+id/end"
         motion:constraintSetStart="@id/start"
-        motion:duration="1000">
+        motion:duration="300">
        <KeyFrameSet>
+           <KeyAttribute
+               motion:motionTarget="@+id/bottomTitleTextView"
+               motion:framePosition="10"
+               android:alpha="0" />
+           <KeyAttribute
+               motion:motionTarget="@+id/bottomPlayerControlButton"
+               motion:framePosition="10"
+               android:alpha="0" />
+           <KeyPosition
+               motion:motionTarget="@+id/playerView"
+               motion:framePosition="10"
+               motion:curveFit="linear"
+               motion:keyPositionType="deltaRelative"
+               motion:percentX="1"
+               motion:percentWidth="1"/>
        </KeyFrameSet>
         <OnSwipe
             motion:touchAnchorId="@+id/mainContainerLayout"
@@ -71,5 +86,14 @@
             motion:layout_constraintBottom_toBottomOf="parent"
             motion:layout_constraintTop_toBottomOf="@id/mainContainerLayout"
             motion:layout_constraintStart_toStartOf="parent" />
+        <Constraint
+            android:id="@+id/bottomPlayerControlButton"
+            motion:layout_constraintEnd_toEndOf="@id/mainContainerLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:alpha="0"
+            motion:layout_constraintBottom_toBottomOf="@id/mainContainerLayout"
+            android:layout_marginEnd="24dp"
+            motion:layout_constraintTop_toTopOf="@id/mainContainerLayout" />
     </ConstraintSet>
 </MotionScene>

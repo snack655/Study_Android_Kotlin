@@ -138,7 +138,6 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback, Overlay.OnClickLis
                 val marker = Marker()
                 marker.position = LatLng(house.lat, house.lng)
                 marker.onClickListener = this@MainActivity
-                // todo 마커 클릭 리스너
                 marker.map = naverMap
                 marker.tag = house.id
                 marker.icon = MarkerIcons.BLACK
