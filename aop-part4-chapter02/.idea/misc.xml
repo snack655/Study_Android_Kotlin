@@ -7,6 +7,7 @@
         <entry key="app/src/main/res/drawable/player_seek_thumb.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.23748321533203126" />
         <entry key="app/src/main/res/layout/fragment_player.xml" value="0.15772247314453142" />
+        <entry key="app/src/main/res/layout/item_music.xml" value="0.28125" />
       </map>
     </option>
   </component>
