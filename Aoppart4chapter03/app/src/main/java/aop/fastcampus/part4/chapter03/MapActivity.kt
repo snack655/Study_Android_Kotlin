@@ -8,12 +8,15 @@ import android.location.Location
 import android.location.LocationListener
 import android.location.LocationManager
 import android.os.Bundle
+import android.util.Log
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import aop.fastcampus.part4.chapter03.databinding.ActivityMainBinding
 import aop.fastcampus.part4.chapter03.model.LocationLatLngEntity
 import aop.fastcampus.part4.chapter03.model.SearchResultEntity
+import aop.fastcampus.part4.chapter03.utillity.RetrofitUtil
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.MapView
@@ -23,8 +26,19 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import kotlinx.android.synthetic.main.activity_map.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import kotlin.coroutines.CoroutineContext
 
-class MapActivity: AppCompatActivity(), OnMapReadyCallback {
+class MapActivity: AppCompatActivity(), OnMapReadyCallback, CoroutineScope {
+
+    private lateinit var job: Job
+
+    override val coroutineContext: CoroutineContext
+        get() = Dispatchers.Main + job
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var map: GoogleMap
@@ -145,6 +159,56 @@ class MapActivity: AppCompatActivity(), OnMapReadyCallback {
             locationLatLngEntity.latitude.toDouble(),
                 locationLatLngEntity.longitude.toDouble(),
         ), CAMERA_ZOOM_LEVEL))
+        locadReverseGeoInformation(locationLatLngEntity)
+        removeLocationListener()
+    }
+
+    private fun locadReverseGeoInformation(locationLatLngEntity: LocationLatLngEntity) {
+        launch(coroutineContext) {
+            try {
+                withContext(Dispatchers.IO) {
+
+                    val response = RetrofitUtil.apiService.getReverseGeoCode(
+                        lat = locationLatLngEntity.latitude.toDouble(),
+                        lon = locationLatLngEntity.longitude.toDouble()
+                    )
+                    if (response.isSuccessful) {
+                        val body = response.body()
+                        withContext(Dispatchers.Main) {
+                            Log.e("list", body.toString())
+                            body?.let {
+                                currentSelectMarker = setupMarker(SearchResultEntity(
+                                    fullAddress = it.addressInfo.fullAddress ?: "주소 정보 없음",
+                                    name = "내 위치",
+                                    locationLatLng = locationLatLngEntity
+                                ))
+                                currentSelectMarker?.showInfoWindow()
+                            }
+                        }
+                    }
+                }
+            } catch (e: Exception) {
+                e.printStackTrace()
+                Toast.makeText(this@MapActivity, "검색하는 과정에서 에러가 발생했습니다.", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
+    private fun removeLocationListener() {
+        if (::locationManager.isInitialized && ::myLocationListener.isInitialized) {
+            locationManager.removeUpdates(myLocationListener)
+        }
+    }
+
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (requestCode == PERMISSION_REQUEST_CODE) {
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED && grantResults[1] == PackageManager.PERMISSION_GRANTED) {
+                setMyLocationListener()
+            } else {
+                Toast.makeText(this, "권한을 받지 못했습니다.", Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 
     inner class MyLocationListener: LocationListener {

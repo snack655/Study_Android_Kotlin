@@ -2,6 +2,7 @@ package aop.fastcampus.part4.chapter03.utillity
 
 import aop.fastcampus.part4.chapter03.Key
 import aop.fastcampus.part4.chapter03.Url
+import aop.fastcampus.part4.chapter03.response.address.AddressInfoResponse
 import aop.fastcampus.part4.chapter03.response.search.SearchResponse
 import retrofit2.Response
 import retrofit2.http.GET
@@ -29,7 +30,7 @@ interface ApiService {
         @Query("centerLat") centerLat: String? = null,
     ): Response<SearchResponse>
 
-    /*@GET(Url.GET_TMAP_REVERSE_GEO_CODE)
+    @GET(Url.GET_TMAP_REVERSE_GEO_CODE)
     suspend fun getReverseGeoCode(
         @Header("appKey") appKey: String = Key.TMAP_API,
         @Query("version") version: Int = 1,
@@ -38,5 +39,5 @@ interface ApiService {
         @Query("lon") lon: Double,
         @Query("coordType") coordType: String? = null,
         @Query("addressType") addressType: String? = null
-    ): Response<AddressInfoResponse>*/
+    ): Response<AddressInfoResponse>
 }
